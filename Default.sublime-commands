@@ -1,0 +1,11 @@
+[
+    {
+        "caption": "Remove Folder",
+        "command": "prompt_folder_remove"
+    },
+
+    {
+        "caption": "Add Folder",
+        "command": "prompt_folder_add"
+    },
+]

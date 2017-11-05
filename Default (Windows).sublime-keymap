@@ -1,0 +1,4 @@
+[
+    { "keys": ["ctrl+alt+shift+n"], "command": "prompt_folder_add"},
+    { "keys": ["ctrl+alt+shift+u"], "command": "prompt_folder_remove"},
+]
