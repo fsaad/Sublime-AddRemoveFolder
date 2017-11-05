@@ -24,5 +24,8 @@ The following options are available in the command palette `ctrl+shift+p`:
 
 ### Installation
 
-Please use Package Control. Alternatively, clone this repository into
+Using [Package Control](https://packagecontrol.io), type `ctrl+shift+p` >
+"Package Control: Install Package" > "AddRemoveFolder".
+
+Alternatively, clone this repository directly into
 `~/.config/sublime-text-3/Packages/`.
