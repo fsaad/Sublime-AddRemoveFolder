@@ -27,9 +27,10 @@ class prompt_folder_remove(sublime_plugin.WindowCommand):
 class prompt_folder_add(sublime_plugin.WindowCommand):
 
     def run(self):
-        file_path = self.window.extract_variables()['file_path']
+        variables = self.window.extract_variables()
+        initial = variables.get('file_path', '')
         self.window.show_input_panel(
-            'Select folder', file_path, self.on_done, self.on_change, None)
+            'Select folder', initial, self.on_done, self.on_change, None)
 
     def on_change(self, filename):
         filename = os.path.expanduser(filename)
