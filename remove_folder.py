@@ -1,4 +1,5 @@
 import os
+import subprocess
 
 import sublime
 import sublime_plugin
@@ -26,7 +27,8 @@ class prompt_folder_remove(sublime_plugin.WindowCommand):
 
 class prompt_folder_add(sublime_plugin.WindowCommand):
 
-    def run(self):
+    def run(self, **kwargs):
+        self.new_window = kwargs.get('new_window', None)
         variables = self.window.extract_variables()
         initial_path = variables.get('file_path', '')
         self.current_files = os.listdir(initial_path) if initial_path else []
@@ -57,18 +59,27 @@ class prompt_folder_add(sublime_plugin.WindowCommand):
             else:
                 sublime.status_message('No such file {}'.format(filename))
         if os.path.exists(filename):
-            if os.path.isdir(filename):
-                config = {'follow_symlinks': True, 'path': filename}
-                data = self.window.project_data()
-                if not data:
-                    data = {'folders': [config]}
-                    self.window.set_project_data(data)
-                else:
-                    data['folders'].append(config)
-                    self.window.set_project_data(data)
-                sublime.status_message('Added folder {}'.format(filename))
+            if self.new_window:
+                self.on_done_new(filename)
             else:
-                self.window.open_file(filename)
+                self.on_done_add(filename)
+
+    def on_done_add(self, filename):
+        if os.path.isdir(filename):
+            config = {'follow_symlinks': True, 'path': filename}
+            data = self.window.project_data()
+            if not data:
+                data = {'folders': [config]}
+                self.window.set_project_data(data)
+            else:
+                data['folders'].append(config)
+                self.window.set_project_data(data)
+            sublime.status_message('Added folder {}'.format(filename))
+        else:
+            self.window.open_file(filename)
+
+    def on_done_new(self, filename):
+        subprocess.Popen(['subl', '-n', filename])
 
 def sort_file_list(filenames):
     hidden = [f for f in filenames if f.startswith('.')]

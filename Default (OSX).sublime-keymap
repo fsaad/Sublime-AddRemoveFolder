@@ -1,4 +1,6 @@
 [
-    { "keys": ["super+alt+shift+n"], "command": "prompt_folder_add"},
+    { "keys": ["super+alt+shift+n"], "command": "prompt_folder_add",
+        "args" : {"new_window": "y"}},
+    { "keys": ["super+alt+shift+m"], "command": "prompt_folder_add"},
     { "keys": ["super+alt+shift+u"], "command": "prompt_folder_remove"},
 ]

@@ -1,7 +1,8 @@
 # AddRemoveFolder
 
 Sublime text plugin which provides command palette entries to add or remove a
-folder from current project.
+folder from current project. It is also possible to open a file/folder in a
+new window.
 
 The main features of this plugin are (i) a folder can be added without needing
 to open an external file manager, and (ii) a folder can be removed without
@@ -19,7 +20,8 @@ The following options are available in the command palette `ctrl+shift+p`:
 
 ### Default Shortcuts
 
-- __Add Folder__: `ctrl+alt+shift+n`
+- __Open File/Folder in New Window__: `ctrl+alt+shift+n`
+- __Add File/Folder To Current Project__: `ctrl+alt+shift+m`
 - __Remove Folder__: `ctrl+alt+shift+u`
 
 ### Installation
