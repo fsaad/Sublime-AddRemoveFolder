@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+
+# Copyright (c) 2017 Feras A. Saad <fsaad@mit.edu>
+# Released under the MIT License; refer to LICENSE.txt.
+
 import os
 import subprocess
 
