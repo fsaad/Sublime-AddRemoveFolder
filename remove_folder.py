@@ -84,7 +84,10 @@ class prompt_folder_add(sublime_plugin.WindowCommand):
             self.window.open_file(filename)
 
     def on_done_new(self, filename):
-        subprocess.Popen(['subl', '-n', filename])
+        if filename.endswith('.sublime-project'):
+            subprocess.Popen(['subl', '--project', filename])
+        else:
+            subprocess.Popen(['subl', '-n', filename])
 
 def sort_file_list(filenames):
     hidden = [f for f in filenames if f.startswith('.')]
