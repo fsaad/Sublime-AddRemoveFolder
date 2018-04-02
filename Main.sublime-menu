@@ -12,14 +12,14 @@
                 "children":
                 [
                     {
-                        "caption": "RemoveFolder",
+                        "caption": "AddRemoveFolder",
                         "children":
                         [
-                            // RemoveFolder default key mappings.
+                            // AddRemoveFolder default key mappings.
                             {
                                 "command": "open_file",
                                 "args": {
-                                    "file": "${packages}/RemoveFolder/Default (Windows).sublime-keymap",
+                                    "file": "${packages}/AddRemoveFolder/Default (Windows).sublime-keymap",
                                     "platform": "Windows"
                                 },
                                 "caption": "Key Bindings – Default"
@@ -27,7 +27,7 @@
                             {
                                 "command": "open_file",
                                 "args": {
-                                    "file": "${packages}/RemoveFolder/Default (OSX).sublime-keymap",
+                                    "file": "${packages}/AddRemoveFolder/Default (OSX).sublime-keymap",
                                     "platform": "OSX"
                                 },
                                 "caption": "Key Bindings – Default"
@@ -35,12 +35,12 @@
                             {
                                 "command": "open_file",
                                 "args": {
-                                    "file": "${packages}/RemoveFolder/Default (Linux).sublime-keymap",
+                                    "file": "${packages}/AddRemoveFolder/Default (Linux).sublime-keymap",
                                     "platform": "Linux"
                                 },
                                 "caption": "Key Bindings – Default"
                             },
-                            // RemoveFolder user key mappings.
+                            // AddRemoveFolder user key mappings.
                             {
                                 "command": "open_file",
                                 "args": {
