@@ -34,9 +34,14 @@ class prompt_folder_add(sublime_plugin.WindowCommand):
 
     def run(self, **kwargs):
         self.new_window = kwargs.get('new_window', None)
+        # XXX Add a user setting to chose whether to initialize the path to
+        # that of the current file, or the latest path chosen.
         variables = self.window.extract_variables()
-        initial_path = variables.get('file_path', '')
-        self.current_files = os.listdir(initial_path) if initial_path else []
+        file_path_current = variables.get('file_path', '')
+        file_path_last = self.get_last_path()
+        initial_path = file_path_last or file_path_current
+        self.current_files = os.listdir(initial_path) \
+            if initial_path and os.path.isdir(initial_path) else []
         self.window.show_input_panel(
             'Select folder', initial_path, self.on_done, self.on_change, None)
 
@@ -64,6 +69,7 @@ class prompt_folder_add(sublime_plugin.WindowCommand):
             else:
                 sublime.status_message('No such file {}'.format(filename))
         if os.path.exists(filename):
+            self.last_path = filename
             if self.new_window:
                 self.on_done_new(filename)
             else:
@@ -88,6 +94,12 @@ class prompt_folder_add(sublime_plugin.WindowCommand):
             subprocess.Popen(['subl', '--project', filename])
         else:
             subprocess.Popen(['subl', '-n', filename])
+
+    def get_last_path(self):
+        if hasattr(self, 'last_path'):
+            return self.last_path
+        self.last_path = None
+        return self.last_path
 
 def sort_file_list(filenames):
     hidden = [f for f in filenames if f.startswith('.')]
