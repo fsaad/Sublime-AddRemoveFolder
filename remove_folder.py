@@ -12,6 +12,11 @@ import sublime_plugin
 class prompt_folder_remove(sublime_plugin.WindowCommand):
 
     def run(self):
+        # If user is has a project, do not activate this plugin.
+        if 'project' in self.window.extract_variables():
+            project = self.window.extract_variables()['project']
+            sublime.status_message('Cannot remove folder from %s.' % (project,))
+            return None
         self.open_folders = self.window.folders()
         if len(self.open_folders) == 0:
             sublime.status_message('No open folders')
