@@ -109,4 +109,6 @@ class prompt_folder_add(sublime_plugin.WindowCommand):
 def sort_file_list(filenames):
     hidden = [f for f in filenames if f.startswith('.')]
     regular = [f for f in filenames if not f.startswith('.')]
-    return sorted(regular) + sorted(hidden)
+    result = sorted(regular) + sorted(hidden)
+    # XXX Hack make a better way to ignore files.
+    return [r for r in result if not r.endswith('.sublime-workspace')]
