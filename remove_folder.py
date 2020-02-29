@@ -93,6 +93,12 @@ class prompt_folder_add(sublime_plugin.WindowCommand):
             self.window.open_file(filename)
 
     def on_done_new(self, filename):
+        if os.path.isdir(filename):
+            files = os.listdir(filename)
+            projects = [f for f in files if f.endswith('.sublime-project')]
+            if len(projects) == 1:
+                filename = os.path.join(
+                    self.current_directory, filename, projects[0])
         if filename.endswith('.sublime-project'):
             subprocess.Popen(['subl', '--project', filename])
         else:
