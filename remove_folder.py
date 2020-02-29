@@ -68,17 +68,15 @@ class prompt_folder_add(sublime_plugin.WindowCommand):
 
     def on_done(self, filename):
         filename = os.path.expanduser(filename)
-        if not os.path.exists(filename):
-            if len(self.matches) == 1:
-                filename = os.path.join(self.current_directory, self.matches[0])
-            else:
-                sublime.status_message('No such file {}'.format(filename))
+        if not os.path.exists(filename) and len(self.matches) == 1:
+            filename = os.path.join(self.current_directory, self.matches[0])
         if os.path.exists(filename):
             self.last_path = filename
             if self.new_window:
                 self.on_done_new(filename)
             else:
                 self.on_done_add(filename)
+        sublime.status_message('No such file {}'.format(filename))
 
     def on_done_add(self, filename):
         if os.path.isdir(filename):
