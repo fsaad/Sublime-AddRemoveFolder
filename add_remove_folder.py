@@ -15,7 +15,7 @@ class prompt_folder_remove(sublime_plugin.WindowCommand):
         # If user is has a project, do not activate this plugin.
         if 'project' in self.window.extract_variables():
             project = self.window.extract_variables()['project']
-            sublime.status_message('Cannot remove folder from %s.' % (project,))
+            sublime.status_message('Cannot remove path from %s.' % (project,))
             return None
         self.open_folders = self.window.folders()
         if len(self.open_folders) == 0:
@@ -28,7 +28,7 @@ class prompt_folder_remove(sublime_plugin.WindowCommand):
             self.window.run_command('remove_folder', {
                 'dirs': [foldername]
             })
-            sublime.status_message('Removed folder {}'.format(foldername))
+            sublime.status_message('Removed path {}'.format(foldername))
             # XXX Add a setting to show again for removing multiple folders.
             # self.open_folders = self.window.folders()
             # self.window.show_quick_panel(self.open_folders, on_done)
@@ -48,7 +48,7 @@ class prompt_folder_add(sublime_plugin.WindowCommand):
         self.current_files = os.listdir(initial_path) \
             if initial_path and os.path.isdir(initial_path) else []
         self.window.show_input_panel(
-            'Select folder', initial_path, self.on_done, self.on_change, None)
+            'Select path', initial_path, self.on_done, self.on_change, None)
 
     def on_change(self, filename):
         filename = os.path.expanduser(filename)
@@ -88,7 +88,7 @@ class prompt_folder_add(sublime_plugin.WindowCommand):
             else:
                 data['folders'].append(config)
                 self.window.set_project_data(data)
-            sublime.status_message('Added folder {}'.format(filename))
+            sublime.status_message('Added path {}'.format(filename))
         else:
             self.window.open_file(filename)
 
