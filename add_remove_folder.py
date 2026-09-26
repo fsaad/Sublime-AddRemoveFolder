@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Copyright (c) 2017 Feras A. Saad <fsaad@mit.edu>
+# Copyright (c) 2026 Feras A. Saad <fsaad@cmu.edu>
 # Released under the MIT License; refer to LICENSE.txt.
 
 import os
@@ -76,7 +76,8 @@ class prompt_folder_add(sublime_plugin.WindowCommand):
                 self.on_done_new(filename)
             else:
                 self.on_done_add(filename)
-        sublime.status_message('No such file {}'.format(filename))
+        else:
+            sublime.status_message('No such file {}'.format(filename))
 
     def on_done_add(self, filename):
         if os.path.isdir(filename):
@@ -86,7 +87,7 @@ class prompt_folder_add(sublime_plugin.WindowCommand):
                 data = {'folders': [config]}
                 self.window.set_project_data(data)
             else:
-                data['folders'].append(config)
+                data.setdefault('folders', []).append(config)
                 self.window.set_project_data(data)
             sublime.status_message('Added path {}'.format(filename))
         else:
